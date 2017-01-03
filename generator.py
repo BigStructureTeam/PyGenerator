@@ -6,7 +6,7 @@ import json
 number_of_requests = 1
 
 # The URL where to post data
-# URL = 'http://yaga.herokuapp.com'
+# URL = 'https://yagan.herokuapp.com/newGeo'
 URL = 'http://127.0.0.1:3000/newGeo'
 
 # Data to send (here in data.json file)
