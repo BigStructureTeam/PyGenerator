@@ -1,29 +1,32 @@
-import requests
-import grequests
-#import requests
+from kafka import KafkaProducer
+import time
 import json
+import random
 
-number_of_requests_package = 100
+
+generator_interval = 1
 number_of_concurrent_requests = 100
-local = True
-
-# The URL where to post data
-production_url = 'https://yagan.herokuapp.com/newGeo'
-local_url = 'http://127.0.0.1:3000/newGeo'
-URL = local_url if local else production_url
-
-# Data to send (here in data.json file)
-with open("./data.json") as json_data:
-    data = json.load(json_data)
+#The kafka producer
+producer = KafkaProducer(bootstrap_servers = ['localhost:9092'], value_serializer=lambda v: json.dumps(v).encode('utf-8'), batch_size=0)
 
 i = 0
-r = []
-while i < number_of_requests_package:
-    # Easy asynchronous HTTP Requests
-    r = (grequests.post(URL, data = data) for i in range(0, number_of_concurrent_requests))
-    response = grequests.map(r)
-    i += 1
+while True:
+    for _ in range(number_of_concurrent_requests):
+        start = time.time()
+        data = json.dumps({
+            "data": {
+                "latitude": random.uniform(45.730, 45.84), "longitude": random.uniform(4.680, 4.830), "timestamp": time.time()
 
+            },
+            "metadata": {
+                "msisdn": "33684525322",
+                "radius": 150
+            }
+        })
+        producer.send('geoloc', data)
+    end = time.time()
+    time.sleep(generator_interval - end + start)
+producer.close(0)
 # Or using requests
 # r = requests.post(URL, data)
 # print(r.text)
