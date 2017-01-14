@@ -16,10 +16,9 @@ while True:
         data = json.dumps({
             "data": {
                 "latitude": random.uniform(45.730, 45.84), "longitude": random.uniform(4.680, 4.830), "timestamp": time.time()
-
             },
             "metadata": {
-                "msisdn": "33684525322",
+                "msisdn": str(random.randint(33600000000,33799999999)),
                 "radius": 150
             }
         })
@@ -27,6 +26,9 @@ while True:
     end = time.time()
     time.sleep(generator_interval - end + start)
 producer.close(0)
+
+
+
 # Or using requests
 # r = requests.post(URL, data)
 # print(r.text)
