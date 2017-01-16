@@ -33,6 +33,9 @@ while True:
     if generator_interval - end + start > 0:
     	time.sleep(generator_interval - end + start)
 producer.close(0)
+
+
+
 # Or using requests
 # r = requests.post(URL, data)
 # print(r.text)
