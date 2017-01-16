@@ -28,8 +28,8 @@ while True:
         })
         producer.send('geodata', data)
     end = time.time()
-    print("time used:")
-    print(end - start)
+    # print("time used:")
+    # print(end - start)
     if generator_interval - end + start > 0:
     	time.sleep(generator_interval - end + start)
 producer.close(0)
