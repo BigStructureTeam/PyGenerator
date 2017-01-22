@@ -5,13 +5,13 @@ import random
 
 
 generator_interval = 1
-<<<<<<< HEAD
-number_of_concurrent_requests = 109000
-The kafka producer
-=======
+
 number_of_concurrent_requests = 2500
 #The kafka producer
->>>>>>> 39abbdce05d308423f4014e4c053ecea172710f4
+
+#Generate 
+
+
 producer = KafkaProducer(bootstrap_servers = ['localhost:9092'], value_serializer=lambda v: json.dumps(v).encode('utf-8'), batch_size=0)
 
 # i = 0
