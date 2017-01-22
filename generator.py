@@ -2,40 +2,29 @@ from kafka import KafkaProducer
 import time
 import json
 import random
+import ujson
 
-
-generator_interval = 1
-
-number_of_concurrent_requests = 2500
 #The kafka producer
-
 producer = KafkaProducer(bootstrap_servers = ['localhost:9092'], batch_size=0, acks=0) # value_serializer=lambda v: v.encode('utf-8')
-count  = 0
-# i = 0
+
+rands = [[random.uniform(45.73, 45.84),random.uniform(4.680, 4.830),str(33600000000 + random.randint(0,199999999))] for i in range(1000)]
+
+count = 0
 while True:
-
-    # for i in range(number_of_concurrent_requests):
-
-	# if (i==0):
-		# start = time.time()
-
-    data = json.dumps({
-        "data": {
-            "latitude": random.uniform(45.690, 45.84), "longitude": random.uniform(4.790, 4.950), "timestamp": time.time()
-        },
-        "metadata": {
-            "msisdn": str(random.randint(33600000000,33799999999)),
-            "radius": 150
-        }
-    }).encode('utf-8')
-
-
-    producer.send('geodata-6', data)
-    count = count + 1
-    # end = time.time()
-
-    if count % 10000 == 0:
-    	print count
+    for _ in range(1000):
+        for randuple in rands:
+            data = ujson.dumps({
+                "data": {
+                    "latitude": randuple[0], "longitude": randuple[1], "timestamp": time.time()
+                },
+                "metadata": {
+                    "msisdn": randuple[2],
+                    "radius": 150
+                }
+            })
+        producer.send('geodata-6', data)
+    count = count + 1000000
+    print count
     # print("time used:")
     # print(end - start)
     # if generator_interval - end + start > 0:
