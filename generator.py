@@ -7,7 +7,7 @@ import random
 generator_interval = 1
 number_of_concurrent_requests = 2500
 #The kafka producer
-producer = KafkaProducer(bootstrap_servers = ['172.31.253.60:9092'], batch_size=0, acks=0) # value_serializer=lambda v: v.encode('utf-8')
+producer = KafkaProducer(bootstrap_servers = ['localhost:9092'], batch_size=0, acks=0) # value_serializer=lambda v: v.encode('utf-8')
 count  = 0
 # i = 0
 while True:
@@ -19,7 +19,7 @@ while True:
 
     data = json.dumps({
         "data": {
-            "latitude": random.uniform(45.730, 45.84), "longitude": random.uniform(4.680, 4.830), "timestamp": time.time()
+            "latitude": random.uniform(45.690, 45.84), "longitude": random.uniform(4.790, 4.950), "timestamp": time.time()
         },
         "metadata": {
             "msisdn": str(random.randint(33600000000,33799999999)),
