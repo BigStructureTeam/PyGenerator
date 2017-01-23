@@ -38,7 +38,7 @@ log_requests=[]
 requests=[]
 times=[]
 
-for i in [1,3,10,30,100,300,1000,3000,10000]:
+for i in [1,3,10,30,100,300,1000,3000]:
     start = time.time()
     for _ in range(i):
         for randuple in rands:
@@ -66,8 +66,8 @@ plt.show()
 ##############################################################################################################
 """
 #Pour montrer la repartition de 1000 points sur la carte.
-abs = [random.uniform(4.680, 4.830) for i in range(1000)]
-ord = [random.uniform(45.730, 45.84) for i in range(1000)]
+abs = [random.uniform(4.79, 4.95) for i in range(1000)]
+ord = [random.uniform(45.69, 45.84) for i in range(1000)]
 plt.scatter(abs, ord)
 
 

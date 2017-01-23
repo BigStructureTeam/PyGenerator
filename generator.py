@@ -7,7 +7,7 @@ import ujson
 #The kafka producer
 producer = KafkaProducer(bootstrap_servers = ['localhost:9092'], batch_size=0, acks=0) # value_serializer=lambda v: v.encode('utf-8')
 
-rands = [[random.uniform(45.73, 45.84),random.uniform(4.680, 4.830),str(33600000000 + random.randint(0,199999999))] for i in range(1000)]
+rands = [[random.uniform(45.79, 45.84),random.uniform(4.79, 4.95),str(33600000000 + random.randint(0,199999999))] for i in range(1000)]
 
 count = 0
 while True:
